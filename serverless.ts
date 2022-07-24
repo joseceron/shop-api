@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript';
 
-import {getProductsList, getProductsById} from '@functions/products'
+import {getProductsList, getProductsById, createProduct} from '@functions/products'
 
 const serverlessConfiguration: AWS = {
   service: 'shop-api',
@@ -21,7 +21,8 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: { 
     getProductsList,
-    getProductsById
+    getProductsById,
+    createProduct,
   },
   package: { individually: true },
   custom: {

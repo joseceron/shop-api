@@ -13,6 +13,9 @@
     "@middy/core": "^2.5.3",
     "@middy/http-cors": "^3.1.0",
     "@middy/http-json-body-parser": "^2.5.3",
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.3",
     "serverless-auto-swagger": "^2.8.2"
   },
   "devDependencies": {
