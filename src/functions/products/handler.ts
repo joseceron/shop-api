@@ -15,8 +15,8 @@ export const getProductsById = middyfy(async (event: APIGatewayProxyEvent): Prom
 }).use(cors());
 
 export const createProduct = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const body = event.body;
+  const productParams = event.body;
   // const product = products.find(p => p.id === id);
-  return formatJSONResponse({body});
+  return formatJSONResponse({product: productParams});
 }).use(cors());
 
