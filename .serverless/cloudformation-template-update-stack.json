@@ -185,9 +185,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/shop-api/dev/1658624827526-2022-07-24T01:07:07.526Z/getProductsList.zip"
+          "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/getProductsList.zip"
         },
-        "Handler": "src/functions/products/handler.getProductsList",
+        "Handler": "src/functions/getProducts/handler.getProductsList",
         "Runtime": "nodejs14.x",
         "FunctionName": "shop-api-dev-getProductsList",
         "MemorySize": 1024,
@@ -195,7 +195,12 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+            "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "PASSWORD": "postgres",
+            "DB": "postgres",
+            "NODE_ENV": "production"
           }
         },
         "Role": {
@@ -216,9 +221,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/shop-api/dev/1658624827526-2022-07-24T01:07:07.526Z/getProductsById.zip"
+          "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/getProductsById.zip"
         },
-        "Handler": "src/functions/products/handler.getProductsById",
+        "Handler": "src/functions/getProductsById/handler.getProductsById",
         "Runtime": "nodejs14.x",
         "FunctionName": "shop-api-dev-getProductsById",
         "MemorySize": 1024,
@@ -226,7 +231,12 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+            "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "PASSWORD": "postgres",
+            "DB": "postgres",
+            "NODE_ENV": "production"
           }
         },
         "Role": {
@@ -247,9 +257,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/shop-api/dev/1658624827526-2022-07-24T01:07:07.526Z/createProduct.zip"
+          "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/createProduct.zip"
         },
-        "Handler": "src/functions/products/handler.createProduct",
+        "Handler": "src/functions/createProduct/handler.createProduct",
         "Runtime": "nodejs14.x",
         "FunctionName": "shop-api-dev-createProduct",
         "MemorySize": 1024,
@@ -257,7 +267,12 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+            "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "PASSWORD": "postgres",
+            "DB": "postgres",
+            "NODE_ENV": "production"
           }
         },
         "Role": {
@@ -278,7 +293,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/shop-api/dev/1658624827526-2022-07-24T01:07:07.526Z/swaggerUI.zip"
+          "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/swaggerUI.zip"
         },
         "Handler": "swagger/swagger-html.handler",
         "Runtime": "nodejs14.x",
@@ -288,7 +303,12 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+            "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "PASSWORD": "postgres",
+            "DB": "postgres",
+            "NODE_ENV": "production"
           }
         },
         "Role": {
@@ -306,7 +326,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/shop-api/dev/1658624827526-2022-07-24T01:07:07.526Z/swaggerJSON.zip"
+          "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/swaggerJSON.zip"
         },
         "Handler": "swagger/swagger-json.handler",
         "Runtime": "nodejs14.x",
@@ -316,7 +336,12 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000"
+            "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+            "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+            "DB_USER": "postgres",
+            "PASSWORD": "postgres",
+            "DB": "postgres",
+            "NODE_ENV": "production"
           }
         },
         "Role": {
@@ -327,27 +352,17 @@
         }
       }
     },
-    "GetProductsListLambdaVersion8HbQw3VglGS6M8ZYgFtrMvJun9T81eMSdpT1qwm5M": {
+    "SwaggerJSONLambdaVersionWu8A45ETvjAMU3ZDgAPmuUIfcIBACe3ZcCYSlMGoE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "GetProductsListLambdaFunction"
+          "Ref": "SwaggerJSONLambdaFunction"
         },
-        "CodeSha256": "uxOPUxY6n9rmCdVnS6LJyGeOSqnRmUX3RZLXs6mtevw="
+        "CodeSha256": "Kj/Az89o9TVcK0x0ZVLX6ebnE6ydGqueTJUdsksu5ps="
       }
     },
-    "CreateProductLambdaVersioncpibKRqAttiKh2qxS2sH8RbwKBI5jV3YZIFsOJ0KPl8": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "CreateProductLambdaFunction"
-        },
-        "CodeSha256": "uxOPUxY6n9rmCdVnS6LJyGeOSqnRmUX3RZLXs6mtevw="
-      }
-    },
-    "SwaggerUILambdaVersion9InnKlTO6NDFJRzC5ggrPQXHurkYjgZYx6AJbDQQ": {
+    "SwaggerUILambdaVersionBZtgWACEvf5eOMsYRHG4xEm6LWPm37QixvOnWQRdQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
@@ -357,24 +372,34 @@
         "CodeSha256": "Lb+5vduAOHFnQgmu7wTa35fetdFuboVIBNcldOD/h+4="
       }
     },
-    "GetProductsByIdLambdaVersionjF6YhixKg5WHKtuAjTsPVSXfHHXnkQpVSpxaBAgqs": {
+    "GetProductsByIdLambdaVersionVoJT8FJPM1LBqV40lrPQy9CFgfKttVGhWWP794Coo4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetProductsByIdLambdaFunction"
         },
-        "CodeSha256": "uxOPUxY6n9rmCdVnS6LJyGeOSqnRmUX3RZLXs6mtevw="
+        "CodeSha256": "q7UqaDELxBPATpScg++ng/K+8le5TEzd3VLgAsAS9Do="
       }
     },
-    "SwaggerJSONLambdaVersionsQ6fOOMAAhupgopJHjYoGIvanNpknot4f7civwEc": {
+    "GetProductsListLambdaVersionxVGPAWq1XqcaDQMNPLEVIxeDUjPPuOa6s4ssoe428aE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "SwaggerJSONLambdaFunction"
+          "Ref": "GetProductsListLambdaFunction"
         },
-        "CodeSha256": "Kj/Az89o9TVcK0x0ZVLX6ebnE6ydGqueTJUdsksu5ps="
+        "CodeSha256": "zjE/kUMVbepxk2FF9l61Gib7dp8MbFyHQ16bgGCoack="
+      }
+    },
+    "CreateProductLambdaVersionkvFoQGsgc28oJXRjYM4sStqNpzwM8OVelpBml1loJ0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "CreateProductLambdaFunction"
+        },
+        "CodeSha256": "iyKo90UgtxLuCbcHvQ/JoQzOXdlDGIpji56EXN/wa0I="
       }
     },
     "ApiGatewayRestApi": {
@@ -645,7 +670,7 @@
         "CreateProductLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1658624824564": {
+    "ApiGatewayDeployment1658692651899": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -952,28 +977,19 @@
         "Name": "sls-shop-api-dev-ServerlessDeploymentBucketName"
       }
     },
-    "GetProductsListLambdaFunctionQualifiedArn": {
+    "SwaggerJSONLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductsListLambdaVersion8HbQw3VglGS6M8ZYgFtrMvJun9T81eMSdpT1qwm5M"
+        "Ref": "SwaggerJSONLambdaVersionWu8A45ETvjAMU3ZDgAPmuUIfcIBACe3ZcCYSlMGoE"
       },
       "Export": {
-        "Name": "sls-shop-api-dev-GetProductsListLambdaFunctionQualifiedArn"
-      }
-    },
-    "CreateProductLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "CreateProductLambdaVersioncpibKRqAttiKh2qxS2sH8RbwKBI5jV3YZIFsOJ0KPl8"
-      },
-      "Export": {
-        "Name": "sls-shop-api-dev-CreateProductLambdaFunctionQualifiedArn"
+        "Name": "sls-shop-api-dev-SwaggerJSONLambdaFunctionQualifiedArn"
       }
     },
     "SwaggerUILambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SwaggerUILambdaVersion9InnKlTO6NDFJRzC5ggrPQXHurkYjgZYx6AJbDQQ"
+        "Ref": "SwaggerUILambdaVersionBZtgWACEvf5eOMsYRHG4xEm6LWPm37QixvOnWQRdQ"
       },
       "Export": {
         "Name": "sls-shop-api-dev-SwaggerUILambdaFunctionQualifiedArn"
@@ -982,19 +998,28 @@
     "GetProductsByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductsByIdLambdaVersionjF6YhixKg5WHKtuAjTsPVSXfHHXnkQpVSpxaBAgqs"
+        "Ref": "GetProductsByIdLambdaVersionVoJT8FJPM1LBqV40lrPQy9CFgfKttVGhWWP794Coo4"
       },
       "Export": {
         "Name": "sls-shop-api-dev-GetProductsByIdLambdaFunctionQualifiedArn"
       }
     },
-    "SwaggerJSONLambdaFunctionQualifiedArn": {
+    "GetProductsListLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SwaggerJSONLambdaVersionsQ6fOOMAAhupgopJHjYoGIvanNpknot4f7civwEc"
+        "Ref": "GetProductsListLambdaVersionxVGPAWq1XqcaDQMNPLEVIxeDUjPPuOa6s4ssoe428aE"
       },
       "Export": {
-        "Name": "sls-shop-api-dev-SwaggerJSONLambdaFunctionQualifiedArn"
+        "Name": "sls-shop-api-dev-GetProductsListLambdaFunctionQualifiedArn"
+      }
+    },
+    "CreateProductLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "CreateProductLambdaVersionkvFoQGsgc28oJXRjYM4sStqNpzwM8OVelpBml1loJ0"
+      },
+      "Export": {
+        "Name": "sls-shop-api-dev-CreateProductLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

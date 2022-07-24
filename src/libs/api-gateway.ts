@@ -10,3 +10,15 @@ export const formatJSONResponse = (response: Record<string, unknown>  | Record<s
     body: JSON.stringify(response)
   }
 }
+
+export const errorResponse = async (message: string, statusCode = 400) => {
+  return {
+    statusCode,
+    headers: {
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET'
+    },
+    body: JSON.stringify(message)
+  }
+}

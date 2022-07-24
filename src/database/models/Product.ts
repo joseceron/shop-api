@@ -8,7 +8,7 @@ interface ProductAttributes {
 }
 
 export interface ProductInput extends Optional<ProductAttributes, 'description'> {}
-export interface ProductOutput extends Required<ProductAttributes> {}
+export interface ProductOutput extends Optional<ProductAttributes, 'description'> {}
 
 class Product extends Model<ProductAttributes, ProductInput> implements ProductAttributes {
   public title: string
@@ -30,7 +30,9 @@ Product.init({
     allowNull: false
   }
 },{
-  sequelize: sequelizeConnection
+  tableName: "products",
+  sequelize: sequelizeConnection,
+  timestamps: false,
 })
 
 export default Product

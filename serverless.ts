@@ -1,6 +1,10 @@
 import type { AWS } from '@serverless/typescript';
 
-import {getProductsList, getProductsById, createProduct} from '@functions/products'
+// import {getProductsList, getProductsById, createProduct} from '@functions/products'
+// import {createProduct} from '@functions/products'
+import {createProduct} from '@functions/createProduct'
+import {getProductsList} from '@functions/getProducts'
+import {getProductsById} from '@functions/getProductsById'
 
 const serverlessConfiguration: AWS = {
   service: 'shop-api',
@@ -16,6 +20,11 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      HOST: '',
+      DB_USER: '',
+      PASSWORD: '',
+      DB: '',
+      NODE_ENV: 'production',
     },
   },
   // import the function via paths
@@ -33,12 +42,12 @@ const serverlessConfiguration: AWS = {
       bundle: true,
       minify: false,
       sourcemap: true,
-      exclude: ['aws-sdk'],
+      exclude: ['aws-sdk', 'pg-native'],
       target: 'node14',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
-    },
+    }   
   },
 };
 
