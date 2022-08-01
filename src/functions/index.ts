@@ -1,4 +1,5 @@
 export { getProductsList } from "./getProducts";
-// export { createProduct } from "./products";
 export { getProductsById } from "./getProductsById";
-export { createProduct } from "./createProduct"
+export { createProduct } from "./createProduct";
+export { importProductsFile } from "./import-service/importProductsFile";
+export { importFileParser } from "./import-service/importFileParser";

@@ -18,7 +18,9 @@
         "DB_USER": "postgres",
         "PASSWORD": "postgres",
         "DB": "postgres",
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "REGION": "us-east-1",
+        "BUCKET_NAME": "uploaded-shop-api"
       },
       "stage": "dev",
       "region": "us-east-1",
@@ -112,6 +114,18 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/shop-api-dev-createProduct"
+            }
+          },
+          "ImportProductsFileLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/shop-api-dev-importProductsFile"
+            }
+          },
+          "ImportFileParserLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/shop-api-dev-importFileParser"
             }
           },
           "IamRoleLambdaExecution": {
@@ -210,7 +224,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/getProductsList.zip"
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/getProductsList.zip"
               },
               "Handler": "src/functions/getProducts/handler.getProductsList",
               "Runtime": "nodejs14.x",
@@ -225,7 +239,9 @@
                   "DB_USER": "postgres",
                   "PASSWORD": "postgres",
                   "DB": "postgres",
-                  "NODE_ENV": "production"
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
                 }
               },
               "Role": {
@@ -246,7 +262,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/getProductsById.zip"
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/getProductsById.zip"
               },
               "Handler": "src/functions/getProductsById/handler.getProductsById",
               "Runtime": "nodejs14.x",
@@ -261,7 +277,9 @@
                   "DB_USER": "postgres",
                   "PASSWORD": "postgres",
                   "DB": "postgres",
-                  "NODE_ENV": "production"
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
                 }
               },
               "Role": {
@@ -282,7 +300,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/createProduct.zip"
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/createProduct.zip"
               },
               "Handler": "src/functions/createProduct/handler.createProduct",
               "Runtime": "nodejs14.x",
@@ -297,7 +315,9 @@
                   "DB_USER": "postgres",
                   "PASSWORD": "postgres",
                   "DB": "postgres",
-                  "NODE_ENV": "production"
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
                 }
               },
               "Role": {
@@ -311,6 +331,82 @@
               "CreateProductLogGroup"
             ]
           },
+          "ImportProductsFileLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/importProductsFile.zip"
+              },
+              "Handler": "src/functions/import-service/importProductsFile/handler.importProductsFile",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "shop-api-dev-importProductsFile",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+                  "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+                  "DB_USER": "postgres",
+                  "PASSWORD": "postgres",
+                  "DB": "postgres",
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ImportProductsFileLogGroup"
+            ]
+          },
+          "ImportFileParserLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/importFileParser.zip"
+              },
+              "Handler": "src/functions/import-service/importFileParser/handler.importFileParser",
+              "Runtime": "nodejs14.x",
+              "FunctionName": "shop-api-dev-importFileParser",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                  "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
+                  "HOST": "database-1.cvdyadm1wxrj.us-east-1.rds.amazonaws.com",
+                  "DB_USER": "postgres",
+                  "PASSWORD": "postgres",
+                  "DB": "postgres",
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ImportFileParserLogGroup"
+            ]
+          },
           "SwaggerUILambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -318,7 +414,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/swaggerUI.zip"
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/swaggerUI.zip"
               },
               "Handler": "swagger/swagger-html.handler",
               "Runtime": "nodejs14.x",
@@ -333,7 +429,9 @@
                   "DB_USER": "postgres",
                   "PASSWORD": "postgres",
                   "DB": "postgres",
-                  "NODE_ENV": "production"
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
                 }
               },
               "Role": {
@@ -351,7 +449,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z/swaggerJSON.zip"
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/swaggerJSON.zip"
               },
               "Handler": "swagger/swagger-json.handler",
               "Runtime": "nodejs14.x",
@@ -366,7 +464,9 @@
                   "DB_USER": "postgres",
                   "PASSWORD": "postgres",
                   "DB": "postgres",
-                  "NODE_ENV": "production"
+                  "NODE_ENV": "production",
+                  "REGION": "us-east-1",
+                  "BUCKET_NAME": "uploaded-shop-api"
                 }
               },
               "Role": {
@@ -377,17 +477,17 @@
               }
             }
           },
-          "SwaggerJSONLambdaVersionWu8A45ETvjAMU3ZDgAPmuUIfcIBACe3ZcCYSlMGoE": {
+          "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "SwaggerJSONLambdaFunction"
+                "Ref": "ImportFileParserLambdaFunction"
               },
-              "CodeSha256": "Kj/Az89o9TVcK0x0ZVLX6ebnE6ydGqueTJUdsksu5ps="
+              "CodeSha256": "qRzYuX5PqZMFqj1k6w/5PD+wUNIxSDHIc5D6FpZJ5R8="
             }
           },
-          "SwaggerUILambdaVersionBZtgWACEvf5eOMsYRHG4xEm6LWPm37QixvOnWQRdQ": {
+          "SwaggerUILambdaVersionHWKs3y5UYfz3HthG5N6FqAWcvYU6j2740wW2H00k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -397,17 +497,27 @@
               "CodeSha256": "Lb+5vduAOHFnQgmu7wTa35fetdFuboVIBNcldOD/h+4="
             }
           },
-          "GetProductsByIdLambdaVersionVoJT8FJPM1LBqV40lrPQy9CFgfKttVGhWWP794Coo4": {
+          "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetProductsByIdLambdaFunction"
+                "Ref": "SwaggerJSONLambdaFunction"
               },
-              "CodeSha256": "q7UqaDELxBPATpScg++ng/K+8le5TEzd3VLgAsAS9Do="
+              "CodeSha256": "foB9y1pTjX1fjJxzM7HHAZWKxKyDIWCSvb44d/QlI7M="
             }
           },
-          "GetProductsListLambdaVersionxVGPAWq1XqcaDQMNPLEVIxeDUjPPuOa6s4ssoe428aE": {
+          "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ImportProductsFileLambdaFunction"
+              },
+              "CodeSha256": "dvEURSxO2bkY20KcStgvYBHwto66d4483t9K0WdvKSw="
+            }
+          },
+          "GetProductsListLambdaVersionVt5G1dIC9VxfcgPaGyZ7IU0EpOOOMwilthUw8AQ34": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -417,7 +527,17 @@
               "CodeSha256": "zjE/kUMVbepxk2FF9l61Gib7dp8MbFyHQ16bgGCoack="
             }
           },
-          "CreateProductLambdaVersionkvFoQGsgc28oJXRjYM4sStqNpzwM8OVelpBml1loJ0": {
+          "GetProductsByIdLambdaVersionzeqrmc8e44RgpARcJTbxDh3rrgny6Aql680RywUOrs": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetProductsByIdLambdaFunction"
+              },
+              "CodeSha256": "q7UqaDELxBPATpScg++ng/K+8le5TEzd3VLgAsAS9Do="
+            }
+          },
+          "CreateProductLambdaVersion1jOE2CnSFd5xpcq7UtPiX0iyyX4K2bAdA9JdEoda4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -426,6 +546,148 @@
               },
               "CodeSha256": "iyKo90UgtxLuCbcHvQ/JoQzOXdlDGIpji56EXN/wa0I="
             }
+          },
+          "ImportFileParserCustomS31": {
+            "Type": "Custom::S3",
+            "Version": 1,
+            "DependsOn": [
+              "ImportFileParserLambdaFunction",
+              "CustomDashresourceDashexistingDashs3LambdaFunction"
+            ],
+            "Properties": {
+              "ServiceToken": {
+                "Fn::GetAtt": [
+                  "CustomDashresourceDashexistingDashs3LambdaFunction",
+                  "Arn"
+                ]
+              },
+              "FunctionName": "shop-api-dev-importFileParser",
+              "BucketName": "uploaded-shop-api",
+              "BucketConfigs": [
+                {
+                  "Event": "s3:ObjectCreated:*",
+                  "Rules": [
+                    {
+                      "Prefix": "uploaded/"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "IamRoleCustomResourcesLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "shop-api",
+                        "custom-resources-lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "s3",
+                              "",
+                              "",
+                              "uploaded-shop-api"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "s3:PutBucketNotification",
+                          "s3:GetBucketNotification"
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "lambda",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              "function",
+                              "*"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "lambda:AddPermission",
+                          "lambda:RemovePermission"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "CustomDashresourceDashexistingDashs3LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/custom-resources.zip"
+              },
+              "FunctionName": "shop-api-dev-custom-resource-existing-s3",
+              "Handler": "s3/handler.handler",
+              "MemorySize": 1024,
+              "Runtime": "nodejs14.x",
+              "Timeout": 180,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleCustomResourcesLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "IamRoleCustomResourcesLambdaExecution"
+            ]
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
@@ -462,6 +724,33 @@
                 "Ref": "ApiGatewayResourceProducts"
               },
               "PathPart": "{id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceImport": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "import",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceImportNameVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceImport"
+              },
+              "PathPart": "{name}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -551,6 +840,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceProductsIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodImportNameVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceImportNameVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -695,7 +1029,53 @@
               "CreateProductLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1658692651899": {
+          "ApiGatewayMethodImportNameVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceImportNameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ImportProductsFileLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ImportProductsFileLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1659396890288": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -706,9 +1086,11 @@
             "DependsOn": [
               "ApiGatewayMethodProductsOptions",
               "ApiGatewayMethodProductsIdVarOptions",
+              "ApiGatewayMethodImportNameVarOptions",
               "ApiGatewayMethodProductsGet",
               "ApiGatewayMethodProductsIdVarGet",
-              "ApiGatewayMethodProductsPost"
+              "ApiGatewayMethodProductsPost",
+              "ApiGatewayMethodImportNameVarGet"
             ]
           },
           "GetProductsListLambdaPermissionApiGateway": {
@@ -791,6 +1173,43 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "CreateProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "ImportProductsFileLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ImportProductsFileLambdaFunction",
                   "Arn"
                 ]
               },
@@ -996,46 +1415,64 @@
               "Name": "sls-shop-api-dev-ServerlessDeploymentBucketName"
             }
           },
-          "SwaggerJSONLambdaFunctionQualifiedArn": {
+          "ImportFileParserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SwaggerJSONLambdaVersionWu8A45ETvjAMU3ZDgAPmuUIfcIBACe3ZcCYSlMGoE"
+              "Ref": "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE"
             },
             "Export": {
-              "Name": "sls-shop-api-dev-SwaggerJSONLambdaFunctionQualifiedArn"
+              "Name": "sls-shop-api-dev-ImportFileParserLambdaFunctionQualifiedArn"
             }
           },
           "SwaggerUILambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SwaggerUILambdaVersionBZtgWACEvf5eOMsYRHG4xEm6LWPm37QixvOnWQRdQ"
+              "Ref": "SwaggerUILambdaVersionHWKs3y5UYfz3HthG5N6FqAWcvYU6j2740wW2H00k"
             },
             "Export": {
               "Name": "sls-shop-api-dev-SwaggerUILambdaFunctionQualifiedArn"
             }
           },
-          "GetProductsByIdLambdaFunctionQualifiedArn": {
+          "SwaggerJSONLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsByIdLambdaVersionVoJT8FJPM1LBqV40lrPQy9CFgfKttVGhWWP794Coo4"
+              "Ref": "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8"
             },
             "Export": {
-              "Name": "sls-shop-api-dev-GetProductsByIdLambdaFunctionQualifiedArn"
+              "Name": "sls-shop-api-dev-SwaggerJSONLambdaFunctionQualifiedArn"
+            }
+          },
+          "ImportProductsFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM"
+            },
+            "Export": {
+              "Name": "sls-shop-api-dev-ImportProductsFileLambdaFunctionQualifiedArn"
             }
           },
           "GetProductsListLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsListLambdaVersionxVGPAWq1XqcaDQMNPLEVIxeDUjPPuOa6s4ssoe428aE"
+              "Ref": "GetProductsListLambdaVersionVt5G1dIC9VxfcgPaGyZ7IU0EpOOOMwilthUw8AQ34"
             },
             "Export": {
               "Name": "sls-shop-api-dev-GetProductsListLambdaFunctionQualifiedArn"
             }
           },
+          "GetProductsByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetProductsByIdLambdaVersionzeqrmc8e44RgpARcJTbxDh3rrgny6Aql680RywUOrs"
+            },
+            "Export": {
+              "Name": "sls-shop-api-dev-GetProductsByIdLambdaFunctionQualifiedArn"
+            }
+          },
           "CreateProductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateProductLambdaVersionkvFoQGsgc28oJXRjYM4sStqNpzwM8OVelpBml1loJ0"
+              "Ref": "CreateProductLambdaVersion1jOE2CnSFd5xpcq7UtPiX0iyyX4K2bAdA9JdEoda4"
             },
             "Export": {
               "Name": "sls-shop-api-dev-CreateProductLambdaFunctionQualifiedArn"
@@ -1253,7 +1690,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsListLambdaVersionxVGPAWq1XqcaDQMNPLEVIxeDUjPPuOa6s4ssoe428aE"
+        "versionLogicalId": "GetProductsListLambdaVersionVt5G1dIC9VxfcgPaGyZ7IU0EpOOOMwilthUw8AQ34"
       },
       "getProductsById": {
         "handler": "src/functions/getProductsById/handler.getProductsById",
@@ -1296,7 +1733,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsByIdLambdaVersionVoJT8FJPM1LBqV40lrPQy9CFgfKttVGhWWP794Coo4"
+        "versionLogicalId": "GetProductsByIdLambdaVersionzeqrmc8e44RgpARcJTbxDh3rrgny6Aql680RywUOrs"
       },
       "createProduct": {
         "handler": "src/functions/createProduct/handler.createProduct",
@@ -1339,7 +1776,76 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateProductLambdaVersionkvFoQGsgc28oJXRjYM4sStqNpzwM8OVelpBml1loJ0"
+        "versionLogicalId": "CreateProductLambdaVersion1jOE2CnSFd5xpcq7UtPiX0iyyX4K2bAdA9JdEoda4"
+      },
+      "importProductsFile": {
+        "handler": "src/functions/import-service/importProductsFile/handler.importProductsFile",
+        "events": [
+          {
+            "http": {
+              "method": "get",
+              "path": "import/{name}",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "responses": {
+                "200": {
+                  "description": "Success response",
+                  "bodyType": "Product"
+                }
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "shop-api-dev-importProductsFile",
+        "package": {
+          "artifact": "/Users/jose/LocalDocs/Develop/vue/epam/shop-api/.serverless/importProductsFile.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM"
+      },
+      "importFileParser": {
+        "handler": "src/functions/import-service/importFileParser/handler.importFileParser",
+        "events": [
+          {
+            "s3": {
+              "bucket": "uploaded-shop-api",
+              "event": "s3:ObjectCreated:*",
+              "rules": [
+                {
+                  "prefix": "uploaded/"
+                }
+              ],
+              "existing": true
+            }
+          }
+        ],
+        "name": "shop-api-dev-importFileParser",
+        "package": {
+          "artifact": "/Users/jose/LocalDocs/Develop/vue/epam/shop-api/.serverless/importFileParser.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs14.x",
+        "vpc": {},
+        "versionLogicalId": "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE"
       },
       "swaggerUI": {
         "name": "shop-api-dev-swagger-ui",
@@ -1362,7 +1868,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "SwaggerUILambdaVersionBZtgWACEvf5eOMsYRHG4xEm6LWPm37QixvOnWQRdQ"
+        "versionLogicalId": "SwaggerUILambdaVersionHWKs3y5UYfz3HthG5N6FqAWcvYU6j2740wW2H00k"
       },
       "swaggerJSON": {
         "name": "shop-api-dev-swagger-json",
@@ -1385,7 +1891,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "SwaggerJSONLambdaVersionWu8A45ETvjAMU3ZDgAPmuUIfcIBACe3ZcCYSlMGoE"
+        "versionLogicalId": "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8"
       }
     },
     "configValidationMode": "warn",
@@ -1408,6 +1914,12 @@
         },
         "createProduct": {
           "$ref": "$[\"service\"][\"functions\"][\"createProduct\"]"
+        },
+        "importProductsFile": {
+          "$ref": "$[\"service\"][\"functions\"][\"importProductsFile\"]"
+        },
+        "importFileParser": {
+          "$ref": "$[\"service\"][\"functions\"][\"importFileParser\"]"
         }
       },
       "package": {
@@ -1422,7 +1934,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/shop-api/dev/1658692655683-2022-07-24T19:57:35.683Z",
+    "artifactDirectoryName": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z",
     "artifact": ""
   }
 }

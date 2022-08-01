@@ -78,6 +78,35 @@
           }
         }
       }
+    },
+    "/import/{name}": {
+      "get": {
+        "summary": "importProductsFile",
+        "description": "",
+        "operationId": "importProductsFile.get.import/{name}",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
