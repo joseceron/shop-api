@@ -79,25 +79,18 @@
         }
       }
     },
-    "/import/{name}": {
+    "/import": {
       "get": {
         "summary": "importProductsFile",
         "description": "",
-        "operationId": "importProductsFile.get.import/{name}",
+        "operationId": "importProductsFile.get.import",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success response",

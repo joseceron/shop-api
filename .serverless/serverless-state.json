@@ -22,6 +22,22 @@
         "REGION": "us-east-1",
         "BUCKET_NAME": "uploaded-shop-api"
       },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Resource": "arn:aws:s3:::uploaded-shop-api"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:*"
+          ],
+          "Resource": "arn:aws:s3:::uploaded-shop-api/*"
+        }
+      ],
       "stage": "dev",
       "region": "us-east-1",
       "versionFunctions": true,
@@ -196,6 +212,12 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/shop-api-dev-swagger-json:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][1]"
                       }
                     ]
                   }
@@ -224,7 +246,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/getProductsList.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/getProductsList.zip"
               },
               "Handler": "src/functions/getProducts/handler.getProductsList",
               "Runtime": "nodejs14.x",
@@ -262,7 +284,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/getProductsById.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/getProductsById.zip"
               },
               "Handler": "src/functions/getProductsById/handler.getProductsById",
               "Runtime": "nodejs14.x",
@@ -300,7 +322,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/createProduct.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/createProduct.zip"
               },
               "Handler": "src/functions/createProduct/handler.createProduct",
               "Runtime": "nodejs14.x",
@@ -338,7 +360,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/importProductsFile.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/importProductsFile.zip"
               },
               "Handler": "src/functions/import-service/importProductsFile/handler.importProductsFile",
               "Runtime": "nodejs14.x",
@@ -376,7 +398,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/importFileParser.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/importFileParser.zip"
               },
               "Handler": "src/functions/import-service/importFileParser/handler.importFileParser",
               "Runtime": "nodejs14.x",
@@ -414,7 +436,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/swaggerUI.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/swaggerUI.zip"
               },
               "Handler": "swagger/swagger-html.handler",
               "Runtime": "nodejs14.x",
@@ -449,7 +471,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/swaggerJSON.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/swaggerJSON.zip"
               },
               "Handler": "swagger/swagger-json.handler",
               "Runtime": "nodejs14.x",
@@ -477,14 +499,14 @@
               }
             }
           },
-          "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE": {
+          "ImportFileParserLambdaVersiony6tBM5rqGCKOY4akto4cOen7WIttQczjQfGmE5JVZTU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ImportFileParserLambdaFunction"
               },
-              "CodeSha256": "qRzYuX5PqZMFqj1k6w/5PD+wUNIxSDHIc5D6FpZJ5R8="
+              "CodeSha256": "PXH24rhSWWFSkc38eG1CTj5K5Pooe/LhojdwPrC5qTw="
             }
           },
           "SwaggerUILambdaVersionHWKs3y5UYfz3HthG5N6FqAWcvYU6j2740wW2H00k": {
@@ -497,24 +519,24 @@
               "CodeSha256": "Lb+5vduAOHFnQgmu7wTa35fetdFuboVIBNcldOD/h+4="
             }
           },
-          "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8": {
+          "SwaggerJSONLambdaVersionjZUnEPYk9L1MUJ4q5dRjzkWoOV8amSucu6m1BvpyKE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SwaggerJSONLambdaFunction"
               },
-              "CodeSha256": "foB9y1pTjX1fjJxzM7HHAZWKxKyDIWCSvb44d/QlI7M="
+              "CodeSha256": "KQIYwehDDwz5GPcvqiQUw8I+fnZjr/JswiAW2VDQJcE="
             }
           },
-          "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM": {
+          "ImportProductsFileLambdaVersionsTFa98VQ74IXL9Z8ksspWzirRYW12oG3xQS3NJDY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ImportProductsFileLambdaFunction"
               },
-              "CodeSha256": "dvEURSxO2bkY20KcStgvYBHwto66d4483t9K0WdvKSw="
+              "CodeSha256": "ADETZZv9IIfICbZOxhYy2It0tb+JBwOs1gEHZCrq3MQ="
             }
           },
           "GetProductsListLambdaVersionVt5G1dIC9VxfcgPaGyZ7IU0EpOOOMwilthUw8AQ34": {
@@ -671,7 +693,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z/custom-resources.zip"
+                "S3Key": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z/custom-resources.zip"
               },
               "FunctionName": "shop-api-dev-custom-resource-existing-s3",
               "Handler": "s3/handler.handler",
@@ -739,18 +761,6 @@
                 ]
               },
               "PathPart": "import",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceImportNameVar": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Ref": "ApiGatewayResourceImport"
-              },
-              "PathPart": "{name}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -846,7 +856,7 @@
               }
             }
           },
-          "ApiGatewayMethodImportNameVarOptions": {
+          "ApiGatewayMethodImportOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -884,7 +894,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceImportNameVar"
+                "Ref": "ApiGatewayResourceImport"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1029,13 +1039,13 @@
               "CreateProductLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodImportNameVarGet": {
+          "ApiGatewayMethodImportGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceImportNameVar"
+                "Ref": "ApiGatewayResourceImport"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1075,7 +1085,7 @@
               "ImportProductsFileLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1659396890288": {
+          "ApiGatewayDeployment1659461723815": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1086,11 +1096,11 @@
             "DependsOn": [
               "ApiGatewayMethodProductsOptions",
               "ApiGatewayMethodProductsIdVarOptions",
-              "ApiGatewayMethodImportNameVarOptions",
+              "ApiGatewayMethodImportOptions",
               "ApiGatewayMethodProductsGet",
               "ApiGatewayMethodProductsIdVarGet",
               "ApiGatewayMethodProductsPost",
-              "ApiGatewayMethodImportNameVarGet"
+              "ApiGatewayMethodImportGet"
             ]
           },
           "GetProductsListLambdaPermissionApiGateway": {
@@ -1418,7 +1428,7 @@
           "ImportFileParserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE"
+              "Ref": "ImportFileParserLambdaVersiony6tBM5rqGCKOY4akto4cOen7WIttQczjQfGmE5JVZTU"
             },
             "Export": {
               "Name": "sls-shop-api-dev-ImportFileParserLambdaFunctionQualifiedArn"
@@ -1436,7 +1446,7 @@
           "SwaggerJSONLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8"
+              "Ref": "SwaggerJSONLambdaVersionjZUnEPYk9L1MUJ4q5dRjzkWoOV8amSucu6m1BvpyKE"
             },
             "Export": {
               "Name": "sls-shop-api-dev-SwaggerJSONLambdaFunctionQualifiedArn"
@@ -1445,7 +1455,7 @@
           "ImportProductsFileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM"
+              "Ref": "ImportProductsFileLambdaVersionsTFa98VQ74IXL9Z8ksspWzirRYW12oG3xQS3NJDY"
             },
             "Export": {
               "Name": "sls-shop-api-dev-ImportProductsFileLambdaFunctionQualifiedArn"
@@ -1784,7 +1794,7 @@
           {
             "http": {
               "method": "get",
-              "path": "import/{name}",
+              "path": "import",
               "cors": {
                 "origin": "*",
                 "methods": [
@@ -1819,7 +1829,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ImportProductsFileLambdaVersionhxHyWiGDl777K1chmCD0sOY0YL3NgKCi2NH3kNRaXuM"
+        "versionLogicalId": "ImportProductsFileLambdaVersionsTFa98VQ74IXL9Z8ksspWzirRYW12oG3xQS3NJDY"
       },
       "importFileParser": {
         "handler": "src/functions/import-service/importFileParser/handler.importFileParser",
@@ -1845,7 +1855,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ImportFileParserLambdaVersionGadxFbJg3oXMFEy3xSEugBGdJlcdX3O1yOtFMaUcCE"
+        "versionLogicalId": "ImportFileParserLambdaVersiony6tBM5rqGCKOY4akto4cOen7WIttQczjQfGmE5JVZTU"
       },
       "swaggerUI": {
         "name": "shop-api-dev-swagger-ui",
@@ -1891,7 +1901,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "SwaggerJSONLambdaVersionsMelXAckcp09L5CuvpcVAqzUZK2XbizW7LaBUQnC8"
+        "versionLogicalId": "SwaggerJSONLambdaVersionjZUnEPYk9L1MUJ4q5dRjzkWoOV8amSucu6m1BvpyKE"
       }
     },
     "configValidationMode": "warn",
@@ -1934,7 +1944,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/shop-api/dev/1659396893336-2022-08-01T23:34:53.336Z",
+    "artifactDirectoryName": "serverless/shop-api/dev/1659461727486-2022-08-02T17:35:27.486Z",
     "artifact": ""
   }
 }

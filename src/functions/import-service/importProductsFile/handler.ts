@@ -20,20 +20,21 @@ import fetch from "node-fetch";
 export const importProductsFile = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   
   try {
-    const name = event.pathParameters.name;   
+    
+    const name = event.queryStringParameters.name;   
     console.log('name: ', name);
 
     // const s3 = new AWS.S3({region: 'us-east-1'});
 
     const BUCKET = 'uploaded-shop-api';
-    const catalogPath = 'uploaded/catalog.csv';
+    // const catalogPath = 'uploaded/catalog.csv';
+    const catalogPath = `uploaded/${name}`;
 
     const params = {
       Bucket: BUCKET,
       Key: catalogPath,
       // Expires: 60,
       ContentType: 'text/csv',
-      Body: "BODY"
     }
    
     // s3.getSignedUrl('putObject', params, (error, url) => {

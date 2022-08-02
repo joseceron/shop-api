@@ -6,11 +6,11 @@ export const importProductsFile = {
     {
       http: {
         method: 'get',
-        path: 'import/{name}',
+        path: 'import',
         cors: {
-          origin: '*'
+          origin: '*',
         },
-        responses: {
+        responses: {          
           '200': {
             description: 'Success response',
             bodyType: 'Product'

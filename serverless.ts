@@ -29,7 +29,7 @@ const serverlessConfiguration: AWS = {
       REGION: 'us-east-1',
       BUCKET_NAME: 'uploaded-shop-api'
     },
-    // iamRoleStatements: [
+    iamRoleStatements: [
       // {
       //   Effect: 'Allow',
       //   Action: ['s3:ListBucket' ],
@@ -40,17 +40,17 @@ const serverlessConfiguration: AWS = {
       //   Action: ['s3:*' ],
       //   Resource: [ 'arn:aws:s3:::shop-api-repository/*' ]
       // },
-    //   {
-    //     Effect: 'Allow',
-    //     Action: ['s3:ListBucket' ],
-    //     Resource: [ 'arn:aws:s3:::uploaded-shop-api' ]
-    //   },
-    //   {
-    //     Effect: 'Allow',
-    //     Action: ['s3:*' ],
-    //     Resource: [ 'arn:aws:s3:::uploaded-shop-api/*' ]
-    //   }
-    // ]
+      {
+        Effect: 'Allow',
+        Action: ['s3:ListBucket' ],
+        Resource: [ 'arn:aws:s3:::uploaded-shop-api' ]
+      },
+      {
+        Effect: 'Allow',
+        Action: ['s3:*' ],
+        Resource: [ 'arn:aws:s3:::uploaded-shop-api/*' ]
+      }
+    ]
   },
   // import the function via paths
   functions: { 
