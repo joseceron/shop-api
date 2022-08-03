@@ -28,37 +28,13 @@ const serverlessConfiguration: AWS = {
       NODE_ENV: 'production',
       REGION: 'us-east-1',
       BUCKET_NAME: 'uploaded-shop-api'
-    },
-    // iamRoleStatements: [
-      // {
-      //   Effect: 'Allow',
-      //   Action: ['s3:ListBucket' ],
-      //   Resource: [ 'arn:aws:s3:::shop-api-repository' ]
-      // },
-      // {
-      //   Effect: 'Allow',
-      //   Action: ['s3:*' ],
-      //   Resource: [ 'arn:aws:s3:::shop-api-repository/*' ]
-      // },
-      // {
-      //   Effect: 'Allow',
-      //   Action: ['s3:ListBucket' ],
-      //   Resource: [ 'arn:aws:s3:::uploaded-shop-api' ]
-      // },
-      // {
-      //   Effect: 'Allow',
-      //   Action: ['s3:*' ],
-      //   Resource: [ 'arn:aws:s3:::uploaded-shop-api/*' ]
-      // }
-    // ]
+    }    
   },
   // import the function via paths
   functions: { 
     getProductsList,
     getProductsById,
-    createProduct,
-    // importProductsFile,
-    // importFileParser,
+    createProduct
   },
   package: { individually: true },
   custom: {
